@@ -1,0 +1,60 @@
+#!/bin/bash
+
+[[ $EUID -ne 0 ]] && exec sudo "$0" "$@"
+
+MODE_FILE="/etc/cpu-mode"
+GOV_SYS="/sys/devices/system/cpu/cpu0/cpufreq/scaling_governor"
+EPP_SYS="/sys/devices/system/cpu/cpu0/cpufreq/energy_performance_preference"
+AC_SYS="/sys/class/power_supply/AC0/online"
+
+set_all() {
+  local gov="$1" epp="$2"
+  for cpu in /sys/devices/system/cpu/cpu*/cpufreq/scaling_governor; do
+    echo "$gov" > "$cpu" 2>/dev/null
+  done
+  [[ -f "$EPP_SYS" ]] && echo "$epp" > "$EPP_SYS" 2>/dev/null
+}
+
+case "${1:-status}" in
+  performance|perf|p)
+    set_all performance performance
+    echo performance > "$MODE_FILE"
+    echo "→ 性能模式（游戏/AI）：performance governor + performance EPP"
+    ;;
+  balanced|balance|b)
+    set_all powersave balance_performance
+    echo balanced > "$MODE_FILE"
+    echo "→ 均衡模式（日常 AC）：powersave + balance_performance"
+    ;;
+  powersave|power|save|s)
+    set_all powersave power
+    echo powersave > "$MODE_FILE"
+    echo "→ 省电模式（电池）：powersave + power EPP"
+    ;;
+  auto|a)
+    echo auto > "$MODE_FILE"
+    if [[ -f "$AC_SYS" && $(<"$AC_SYS") = "1" ]]; then
+      set_all powersave balance_performance
+      echo "→ 自动：已插电源 → 均衡模式"
+    else
+      set_all powersave power
+      echo "→ 自动：使用电池 → 省电模式"
+    fi
+    ;;
+  status|"")
+    echo "模式: $(cat $MODE_FILE 2>/dev/null || echo auto)"
+    echo "AC:  $([ -f $AC_SYS ] && [ $(<$AC_SYS) = 1 ] && echo 接通 || echo 未接)"
+    echo "CPU:  $(cat $GOV_SYS 2>/dev/null || echo ?)"
+    echo "EPP:  $(cat $EPP_SYS 2>/dev/null || echo ?)"
+    echo ""
+    echo "用法: cpu-mode {auto|balanced|performance|powersave|status}"
+    echo "  auto         按电源自动切换（默认）"
+    echo "  balanced     插电均衡（powersave + balance_performance）"
+    echo "  performance  游戏/AI 全速（performance + performance）"
+    echo "  powersave    电池省电（powersave + power）"
+    ;;
+  *)
+    echo "用法: cpu-mode {auto|balanced|performance|powersave|status}"
+    exit 1
+    ;;
+esac

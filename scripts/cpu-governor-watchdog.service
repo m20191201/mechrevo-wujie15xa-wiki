@@ -1,0 +1,12 @@
+[Unit]
+Description=CPU Governor Watchdog – prevents tccd from reverting to performance
+After=multi-user.target
+
+[Service]
+Type=simple
+ExecStart=/usr/local/bin/cpu-governor-watchdog.sh
+Restart=always
+RestartSec=5
+
+[Install]
+WantedBy=multi-user.target

@@ -1,5 +1,7 @@
 # Mechrevo WUJIE15XA
 
+> This page is based on the [ArchWiki: Mechrevo WUJIE14X](https://wiki.archlinux.org/title/Mechrevo_WUJIE14X) page, as the WUJIE15XA shares a similar motherboard platform with the WUJIE14XA. Many hardware details and installation instructions are derived from that page.
+
 ## Hardware
 
 | Device | PCI/USB ID | Working |
@@ -161,6 +163,6 @@ sudo systemctl enable --now bluetooth
 ## See also
 
 - [Mechrevo WUJIE15XA wiki (GitHub)](https://github.com/m20191201/mechrevo-wujie15xa-wiki)
-- [ArchWiki: Mechrevo WUJIE14X](https://wiki.archlinux.org/title/Mechrevo_WUJIE14X)
+- [ArchWiki: Mechrevo WUJIE14X](https://wiki.archlinux.org/title/Mechrevo_WUJIE14X) — This page is based on the WUJIE14X page
 - [w568w's ACPI reverse-engineering on WUJIE14XA](https://gist.github.com/w568w/b2fc5f9d1f4dff13efe751abec27b396)
 - [sund3RRR's fixes and tweaks](https://github.com/sund3RRR/mechrevo14X-linux)

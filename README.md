@@ -5,6 +5,10 @@
 > This document is a community-maintained compatibility guide for running Arch Linux on the MECHREVO WUJIE 15XA laptop. Both English and Chinese sections are included.
 >
 > 本文档是社区维护的、在机械革命无界15XA笔记本上运行 Arch Linux 的兼容性指南，包含中英双语内容。
+>
+> **Acknowledgments**: This guide is heavily based on the [ArchWiki: Mechrevo WUJIE14X](https://wiki.archlinux.org/title/Mechrevo_WUJIE14X) page, as the two models share a similar motherboard platform and TUXEDO-compatible hardware.
+>
+> **致谢**：本文档大量参考了 [ArchWiki 上 WUJIE14X 的页面](https://wiki.archlinux.org/title/Mechrevo_WUJIE14X)，两者共享相似的主板平台和 TUXEDO 兼容硬件。
 
 ---
 
@@ -296,8 +300,9 @@ bluetoothctl
 
 ## See Also | 参考
 
+- **[ArchWiki: Mechrevo WUJIE14X](https://wiki.archlinux.org/title/Mechrevo_WUJIE14X)** — This guide is based on the WUJIE14X page, as the two models share a common platform. Many hardware details (GPU, Ethernet, audio) and installation steps are derived from that page.
+- **本指南大量参考了 [ArchWiki: Mechrevo WUJIE14X](https://wiki.archlinux.org/title/Mechrevo_WUJIE14X)**，两款机型共享相同的主板平台，硬件细节和安装流程均源自该页面。
 - [Mechrevo Official Support (Chinese)](https://gwqd.mechrevo.com/service/)
-- [ArchWiki: Mechrevo WUJIE14X (sibling model)](https://wiki.archlinux.org/title/Mechrevo_WUJIE14X)
 - [w568w's ACPI reverse-engineering on WUJIE14XA](https://gist.github.com/w568w/b2fc5f9d1f4dff13efe751abec27b396)
 - [sund3RRR's fixes and tweaks for mechrevo14X](https://github.com/sund3RRR/mechrevo14X-linux)
 
